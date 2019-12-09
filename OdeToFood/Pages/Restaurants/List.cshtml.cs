@@ -18,6 +18,7 @@ namespace OdeToFood.Pages.Restaurants
         public string AppSettingMessage { get; set; }
         public IEnumerable<Restaurant> Restaurants { get; set; }
 
+        //Drilling into Data Done
         public ListModel(IConfiguration config,
                          IRestaurantData restaurantData)
         {
