@@ -13,7 +13,8 @@ namespace OdeToFood
     {
         public Restaurant Restaurant{ get; set; }
         public IRestaurantData RestaurantData { get; }
-
+        [TempData]
+        public string Message { get; set; }
         public DetailModel(IRestaurantData restaurantData)
         {
             RestaurantData = restaurantData;
