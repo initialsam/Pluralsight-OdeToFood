@@ -6,14 +6,33 @@
 <div>@Model.Message</div>
 <div>@Model.AppSettingMessage</div>
 <div>
+    <form method="get">
+        <div class="form-group">
+            <div class="input-group">
+                <input type="search" class="form-control" asp-for="SearchTerm" />
+                <div  class="input-group-append">
+                    <button class="btn btn-outline-secondary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
     <table class="table">
         @foreach (var item in Model.Restaurants)
         {
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.Location</td>
-                <td>@item.Cuisine</td>
-            </tr>
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Location</td>
+            <td>@item.Cuisine</td>
+            <td>
+                <a class="btn btn-lg"
+                   asp-page="./Detail"
+                   asp-route-restaurantId="@item.Id">
+                    <i class="fa fa-search-plus"></i>
+                </a>
+            </td>
+        </tr>
         }
     </table>
 

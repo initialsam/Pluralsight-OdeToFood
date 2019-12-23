@@ -15,6 +15,8 @@ namespace OdeToFood.Pages.Restaurants
         private readonly IConfiguration config;
         private readonly IRestaurantData restaurantData;
         public string Message { get; set; }
+        [BindProperty(SupportsGet =true)]
+        public string SearchTerm { get; set; }
         public string AppSettingMessage { get; set; }
         public IEnumerable<Restaurant> Restaurants { get; set; }
 
@@ -29,7 +31,7 @@ namespace OdeToFood.Pages.Restaurants
         {
             this.Message = "Hello";
             this.AppSettingMessage = this.config["Message"];
-            this.Restaurants = this.restaurantData.GetAll();
+            this.Restaurants = this.restaurantData.GetRestaurantsByName(SearchTerm);
         }
     }
 }
