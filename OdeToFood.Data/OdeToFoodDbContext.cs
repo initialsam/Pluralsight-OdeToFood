@@ -15,5 +15,8 @@ namespace OdeToFood.Data
         }
 
         public DbSet<Restaurant> Restaurants { get; set; }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder options)
+        //   => options.UseSqlite("Data Source=sqlitedemo.db");
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -27,7 +28,8 @@ namespace OdeToFood
         {
             services.AddDbContextPool<OdeToFoodDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("OdeToFoodDb"));
+                //options.UseSqlServer(Configuration.GetConnectionString("OdeToFoodDb"));
+                options.UseSqlite("Data Source=sqlitedemo.db");
             });
             services.AddScoped<IRestaurantData, SqlRestaurantData>();
             services.AddRazorPages();
@@ -48,6 +50,7 @@ namespace OdeToFood
                 app.UseHsts();
             }
 
+            app.Use(SayHelloMiddleware);
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseNodeModules();
@@ -60,6 +63,22 @@ namespace OdeToFood
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
             });
+        }
+        private RequestDelegate SayHelloMiddleware(
+                                  RequestDelegate next)
+        {
+            return async ctx =>
+                         {
+
+                             if (ctx.Request.Path.StartsWithSegments("/hello"))
+                             {
+                                 await ctx.Response.WriteAsync("Hello, World!");
+                             }
+                             else
+                             {
+                                 await next(ctx);
+                             }
+                         };
         }
     }
 }
