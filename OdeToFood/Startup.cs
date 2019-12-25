@@ -29,7 +29,7 @@ namespace OdeToFood
             services.AddDbContextPool<OdeToFoodDbContext>(options =>
             {
                 //options.UseSqlServer(Configuration.GetConnectionString("OdeToFoodDb"));
-                options.UseSqlite("Data Source=sqlitedemo.db");
+                options.UseSqlite(@"Data Source=db\sqlitedemo.db");
             });
             services.AddScoped<IRestaurantData, SqlRestaurantData>();
             services.AddRazorPages();
